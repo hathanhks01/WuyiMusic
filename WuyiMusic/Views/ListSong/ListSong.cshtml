@@ -1,0 +1,131 @@
+﻿@model IEnumerable<WuyiDAL.Models.Song>
+
+
+@{
+    ViewData["Title"] = "ListSong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<string> extensions = new List<string>() { ".mp3", ".wav", ".flac", ".aac", ".m4a" };
+}
+
+<style>
+
+    .radio-container {
+        display: flex;
+        flex-wrap: wrap;
+        /* Cho phép các phần tử con xuống dòng */
+        gap: 10px;
+        /* Khoảng cách giữa các phần tử */
+        justify-content: flex-start;
+        /* Căn giữa các phần tử */
+        margin: 0px 10px 0px 10px;
+    }
+
+    .radio-card {
+        position: relative;
+        margin: 10px;
+        flex: 0 0 auto;
+        width: 180px;
+        /* Adjust card width as needed */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* transition: transform 0.2s; */
+        overflow: hidden;
+        /* Đảm bảo các nội dung bên trong không tràn ra ngoài */
+    }
+    /* .radio-card:hover {
+            transform: scale(1.05);
+        } */
+    .song-image {
+        width: 100%;
+        height: 150px;
+        /* Chiều cao cố định cho ảnh */
+        object-fit: cover;
+        /* Đảm bảo ảnh giữ đúng tỉ lệ và bao phủ toàn bộ khung */
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+
+
+    .radio-label {
+        font-weight: bold;
+        text-align: center;
+        padding: 5px;
+    }
+
+    /* Thiết lập thanh audio */
+    audio {
+        display: block;
+        /* Đảm bảo thanh audio được hiển thị là một block element */
+        margin: 0 auto;
+        /* Căn giữa thanh audio */
+        width: 80%;
+        max-width: 100%;
+    }
+
+    .radio-card .bi {
+        position: absolute;
+        bottom: 60px; /* Điều chỉnh top theo nhu cầu */
+        right: 10px; /* Điều chỉnh left theo nhu cầu */
+        color: #1ED760; /* Tùy chỉnh màu sắc cho phù hợp */
+        font-size: 30px; /* Điều chỉnh kích thước biểu tượng */
+        z-index: 1; /* Điều chỉnh vị trí trên cùng */
+        transition: transform 0.2s; /* Thêm transition cho icon */
+    }
+
+        .radio-card .bi:hover {
+            transform: scale(1.2); /* Phóng to icon khi hover */
+        }
+</style>
+
+<h1>ListSong</h1>
+
+
+@if (Model != null && Model.Any())
+{
+    <div class="radio-container">
+        @foreach (var song in Model.ToList())
+        {
+            <div class="radio-cards-container">
+                <div class="radio-card">
+                    <img src="@song.ImgUrl"
+                         class="song-image">
+                    <div class="radio-label">@song.Title</div>
+
+                    <i onclick="playSong('@Url.Content("~/SongPath/" + song.FilePath)','@song.ImgUrl','@song.Title')" class="bi bi-play-circle-fill"></i>
+                </div>
+                </div>          
+
+        }
+    </div>
+}
+else
+{
+    <p>No songs available</p>
+}
+
+
+<script>
+    
+
+    function playSong(songPath,ImgUrl,Title) {
+        let masterPlay = document.getElementById('masterPlay');
+        let wave = document.getElementsByClassName('wave')[0];
+        let img = document.getElementById('imgSong');
+        let subtitle = document.getElementById('nameSong')
+        var audioSource = document.getElementById('audioPlayer');
+        audioSource.src = songPath.replace('~', '');
+        audioSource.load();
+        audioSource.play();
+        masterPlay.classList.remove('bi-play-fill');
+        masterPlay.classList.add('bi-pause-fill');
+        wave.classList.add('active2');
+        img.src = ImgUrl;
+        subtitle.innerHTML = Title;
+
+    }
+
+</script>
+
+
+
