@@ -9,18 +9,22 @@
   <ItemGroup>
     <Compile Remove="Areas\Admin\Data\**" />
     <Compile Remove="Areas\Admin\Models\**" />
+    <Compile Remove="Data\**" />
     <Compile Remove="wwwroot\assets\vendors\**" />
     <Compile Remove="wwwroot\images\**" />
     <Content Remove="Areas\Admin\Data\**" />
     <Content Remove="Areas\Admin\Models\**" />
+    <Content Remove="Data\**" />
     <Content Remove="wwwroot\assets\vendors\**" />
     <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Areas\Admin\Data\**" />
     <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="wwwroot\assets\vendors\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Areas\Admin\Data\**" />
     <None Remove="Areas\Admin\Models\**" />
+    <None Remove="Data\**" />
     <None Remove="wwwroot\assets\vendors\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
@@ -40,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\lib\bootstrap\" />

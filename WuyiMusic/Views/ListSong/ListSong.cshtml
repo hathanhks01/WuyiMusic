@@ -106,7 +106,13 @@ else
 
 
 <script>
-    
+    var songs = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(s => new
+        {
+            FilePath = Url.Content("~/SongPath/" + s.FilePath),
+            ImgUrl = s.ImgUrl,
+            Title = s.Title
+        })));
+    var currentIndex = 0;
 
     function playSong(songPath,ImgUrl,Title) {
         let masterPlay = document.getElementById('masterPlay');
@@ -124,7 +130,31 @@ else
         subtitle.innerHTML = Title;
 
     }
+    function playNext() {
+        currentIndex = (currentIndex + 1) % songs.length;
+        let nextSong = songs[currentIndex];
+        playSong(nextSong.FilePath, nextSong.ImgUrl, nextSong.Title);
+        console.log('nextSong');
+    }
 
+    function playPrevious() {
+        currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+        let prevSong = songs[currentIndex];
+        playSong(prevSong.FilePath, prevSong.ImgUrl, prevSong.Title);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let nextButton = document.getElementById('next');
+        let backButton = document.getElementById('back');
+
+        if (nextButton && backButton) {
+            nextButton.addEventListener('click', playNext);
+            backButton.addEventListener('click', playPrevious);
+        } else {
+            console.error('Các phần tử với ID "next" và "back" không được tìm thấy.');
+        }
+
+    });
 </script>
 
 
