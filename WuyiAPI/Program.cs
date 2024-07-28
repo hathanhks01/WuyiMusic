@@ -4,6 +4,9 @@ using WuyiDAL.Repository;
 using WuyiDAL.Models;
 using WuyiServices.IServices;
 using WuyiServices.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,34 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer("Data Source=MSI\\SQLEXPRESS01;Initial Catalog=DB_WuyiMusic;Persist Security Info=True;User ID=sa;Password=hathanh2304;Trust Server Certificate=True"));
 
+
+// Cấu hình xác thực JWT
+var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"]
+    };
+});
+
+
 // Đăng ký Repository và Service
+builder.Services.AddTransient<IAuthenticateRepo, AuthenticateRepo>();
+builder.Services.AddTransient<IAuthenticateService, AuthenticateService>();
+
 builder.Services.AddScoped(typeof(IAllReponsitories<User>), typeof(AllReponsitories<User>));
 builder.Services.AddScoped(typeof(IServices<User>), typeof(Services<User>));
 builder.Services.AddScoped(typeof(IAllReponsitories<Album>), typeof(AllReponsitories<Album>));
@@ -33,6 +63,7 @@ builder.Services.AddScoped(typeof(IAllReponsitories<Playlist>), typeof(AllRepons
 builder.Services.AddScoped(typeof(IServices<Playlist>), typeof(Services<Playlist>));
 builder.Services.AddScoped(typeof(IAllReponsitories<PlaylistSong>), typeof(AllReponsitories<PlaylistSong>));
 builder.Services.AddScoped(typeof(IServices<PlaylistSong>), typeof(Services<PlaylistSong>));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -47,7 +78,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication(); 
 app.UseAuthorization();
+
 app.UseRouting();
 app.MapControllers();
 app.UseFileServer();

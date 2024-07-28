@@ -18,6 +18,7 @@ namespace WuyiDAL.IReponsitory
         //delete -xóa đối tượng trong DB
         public bool DeleteObj(T obj);
         public T FindByName(string Name);
-        bool UsernameExists(string username);
-    }
+        public bool UsernameExists(string username);
+        public bool Login(string UserName, string Password);
+    }       
 }

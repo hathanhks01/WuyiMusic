@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WuyiDAL.IReponsitory;
@@ -85,5 +86,15 @@ namespace WuyiDAL.Repository
         {
             return _context.Users.Any(u => u.Username == username);
         }
+        public bool Login(string UserName, string Password)
+        {
+            var user = _context.Users.SingleOrDefault(x => x.Username == UserName);
+            if (user == null || user.Password != Password)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

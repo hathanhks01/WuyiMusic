@@ -13,6 +13,7 @@ namespace WuyiDAL.Models
         public Guid GenreId { get; set; }
         [Required, MaxLength(100)]
         public string Name { get; set; }
+        public string ImgUrl { get; set; }
         public ICollection<Song> Songs { get; set; }
     }
 }

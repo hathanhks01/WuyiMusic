@@ -15,5 +15,6 @@ namespace WuyiServices.IServices
         Task<bool> DeleteAsync(T obj);
         Task<T> FindByName(string name);
         Task<bool> UsernameExistsAsync(string username);
+        Task<bool> Login(string UserName, string Password);
     }
 }

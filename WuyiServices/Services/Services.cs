@@ -51,5 +51,9 @@ namespace WuyiServices.Services
         {
             return await Task.Run(() => _repository.UsernameExists(username));
         }
+        public async Task<bool> Login(string UserName, string Password)
+        {
+            return await Task.Run(() => _repository.Login(UserName, Password));
+        }
     }
 }

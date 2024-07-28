@@ -19,7 +19,8 @@ namespace WuyiDAL.Models
         public string Password { get; set; }
         public bool IsArtist { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public int Role { get; set; } = 1;
+
         public Artist? Artist { get; set; }
         public ICollection<Playlist>? Playlists { get; set; }
         public ICollection<UserFollowArtist>? UserFollowArtists { get; set; }

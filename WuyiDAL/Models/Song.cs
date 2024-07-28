@@ -12,7 +12,7 @@ namespace WuyiDAL.Models
     {
         [Key]
         public Guid SongId { get; set; }
-        
+        [ForeignKey("ArtistId")]
         public Guid ArtistId { get; set; }
         public Guid? AlbumId { get; set; }       
         public Guid? GenreId { get; set; }

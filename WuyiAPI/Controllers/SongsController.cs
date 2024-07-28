@@ -107,7 +107,7 @@ namespace WuyiAPI.Controllers
                     FilePath = song.FilePath,
                     ImgUrl= song.ImgUrl,  
                     UploadAt= DateTime.UtcNow,
-                    
+                    artist=song.artist,
                     // You can set CreatedAt and UpdatedAt in the service or here as needed
                 };
                 var createdSong = await _services.CreateAsync(songs);

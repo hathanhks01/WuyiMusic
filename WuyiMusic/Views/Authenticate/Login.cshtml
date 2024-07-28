@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Falling Leaves Animation</title>
+    <link href="~/css/login.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="leaves-container">
+      <!-- Add 20 leaves to the container -->
+      <div class="leaf"><img src="/assets/leave2.png"></div>
+      <div class="leaf"><img src="/assets/leave2.png"></div>
+      <div class="leaf"><img src="/assets/leave2.png"></div>
+      <div class="leaf"><img src="/assets/leave2.png"></div>
+      <br>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+      <div class="leaf"><img src="/assets/leave1.png"></div>
+
+  
+      
+    </div>
+
+    <div  class="login-box">
+      <h2 style="text-align: center;font-family: 'Poppins', sans-serif;">WuyiMusic</h2>
+      <br>
+        <form asp-action="Login" method="post">
+            <label for="UserName"></label>
+            <input  type="text"  id="UserName" name="UserName" placeholder="UserName" required>
+
+            <label for="PassWord"></label>
+            <input type="password" id="PassWord" name="Password" placeholder="Password" required>
+
+            <input type="submit" value="Login">
+        </form>
+
+      <br>
+      <a href="">bạn chưa có tài khoản ?</a>
+      
+      
+    </div>
+  </body>
+</html>
