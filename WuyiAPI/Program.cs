@@ -43,7 +43,6 @@ builder.Services.AddAuthentication(options =>
 
 // Đăng ký Repository và Service
 builder.Services.AddTransient<IAuthenticateRepo, AuthenticateRepo>();
-builder.Services.AddTransient<IAuthenticateService, AuthenticateService>();
 
 builder.Services.AddScoped(typeof(IAllReponsitories<User>), typeof(AllReponsitories<User>));
 builder.Services.AddScoped(typeof(IServices<User>), typeof(Services<User>));
